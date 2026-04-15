@@ -552,10 +552,15 @@ footer{background:var(--ink);padding:38px 56px;display:flex;justify-content:spac
           <div class="res-analysis" id="r-analysis"></div>
           <div class="res-presc" id="r-presc"></div>
           <div class="share-row">
-            <div class="share-lbl">Share your result and help spread the framework</div>
-            <a class="sbtn sbtn-li" id="btn-li-result" href="#" target="_blank" rel="noopener">Share on LinkedIn</a>
+            <div class="share-lbl">Share your result — spread the framework</div>
+            <div id="share-text-box" style="display:none;width:100%;margin:12px 0 16px;">
+              <div style="background:rgba(248,244,236,0.06);border:1px solid rgba(248,244,236,0.15);border-radius:2px;padding:16px 18px;font-family:'Crimson Pro',serif;font-size:15px;line-height:1.7;color:rgba(248,244,236,0.8);white-space:pre-wrap;" id="share-text-content"></div>
+              <button class="sbtn sbtn-copy" onclick="copyShareText()" style="margin-top:10px;width:100%;justify-content:center;">Copy this text → paste on LinkedIn or WhatsApp</button>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;color:rgba(248,244,236,0.3);margin-top:8px;text-transform:uppercase;">Tip: Open LinkedIn, start a post, paste, and post. Takes 30 seconds.</div>
+            </div>
+            <button class="sbtn sbtn-li" id="btn-li-result" onclick="showShareText('li')">Generate LinkedIn Post</button>
             <a class="sbtn sbtn-wa" id="btn-wa-result" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
-            <button class="sbtn sbtn-copy" onclick="copyURL()">Copy Link</button>
+            <button class="sbtn sbtn-copy" onclick="copyURL()">Copy Tool Link</button>
           </div>
           <button class="btn-retake" onclick="initQuiz()">↺ Retake Assessment</button>
         </div>
@@ -781,6 +786,10 @@ function showResult(){
   document.getElementById('quiz-area').style.display='none';
   const rp=document.getElementById('result');
   rp.classList.add('show');
+  currentScore = pct;
+  // hide share text box on new result
+  const stb = document.getElementById('share-text-box');
+  if(stb) stb.style.display='none';
   let c=0;
   const iv=setInterval(()=>{c+=2;if(c>=pct){c=pct;clearInterval(iv);}document.getElementById('r-score').textContent=c;},20);
   setTimeout(()=>{document.getElementById('r-bar').style.width=pct+'%';},80);
@@ -806,6 +815,7 @@ function showResult(){
   document.getElementById('r-badge').style.background=bb;
   document.getElementById('r-analysis').innerHTML=analysis;
   document.getElementById('r-presc').innerHTML=`<h4>What to do with this result</h4>`+px.map(p=>`<div class="presc-item"><span class="presc-arrow">→</span>${p}</div>`).join('');
+  setTimeout(updateWAResult, 100);
 }
 
 /* ─── INTELLIGENT FAQ ENGINE ─── */
@@ -953,20 +963,105 @@ function sendChip(btn) {
   sendChat();
 }
 
+/* ─── SHARE TEXT GENERATOR ─── */
+let currentShareText = '';
+let currentLevel = '';
+let currentScore = 0;
+
+function generateShareText(platform) {
+  const toolURL = 'https://rahulsharmars1988-netizen.github.io/digital-presence-paradox/';
+  const doiURL  = 'https://doi.org/10.5281/zenodo.19593251';
+
+  // Get level label cleanly
+  let lvlShort = '';
+  if (currentScore >= 80)      lvlShort = 'Level 3 — High DIP (Digital Intellectual Presence)';
+  else if (currentScore >= 55) lvlShort = 'Level 2 — Moderate DIP (Digital Intellectual Presence)';
+  else                         lvlShort = 'Level 1 — Low DIP (Digital Intellectual Presence)';
+
+  if (platform === 'li') {
+    return `I just took the Digital Intellectual Presence (DIP) Assessment.
+
+My result: ${currentScore}/100 — ${lvlShort}
+
+The assessment is part of a new framework called the Digital Presence Paradox — which argues that millions of online learners are digitally visible but intellectually invisible.
+
+They log in. They submit. They complete.
+But they leave no intellectual trace on anyone around them.
+
+No institution is currently measuring this.
+
+I found it worth thinking about.
+
+Take the free 10-question DIP Assessment here:
+${toolURL}
+
+Full framework paper (DOI):
+${doiURL}
+
+Framework by Rahul Sharma, DBS Global University
+
+#HigherEducation #OnlineLearning #EdTech #NEP2020 #NAAC`;
+  }
+
+  if (platform === 'wa') {
+    return `I scored ${currentScore}/100 on the Digital Intellectual Presence (DIP) Assessment — ${lvlShort}.
+
+It's a 10-question assessment that measures how intellectually present you are in online learning — not just whether you attend and submit.
+
+Worth 2 minutes: ${toolURL}
+
+Framework paper: ${doiURL}`;
+  }
+
+  return toolURL;
+}
+
+function showShareText(platform) {
+  const text = generateShareText(platform);
+  currentShareText = text;
+  const box = document.getElementById('share-text-box');
+  const content = document.getElementById('share-text-content');
+  content.textContent = text;
+  box.style.display = 'block';
+  box.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function copyShareText() {
+  navigator.clipboard.writeText(currentShareText).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = currentShareText;
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  const btn = document.querySelector('.sbtn-copy');
+  const orig = btn.textContent;
+  btn.textContent = '✓ Copied! Now paste on LinkedIn';
+  setTimeout(()=>{ btn.textContent = orig; }, 3000);
+}
+
 /* ─── SHARE ─── */
 const PAGE=window.location.href;
 const STXT='I just took the Digital Intellectual Presence (DIP) assessment — a framework by Rahul Sharma on the Digital Presence Paradox in online education. Are you digitally present but intellectually invisible?';
 function buildShareURLs(){
   const liURL = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(PAGE);
   const waURL = 'https://wa.me/?text=' + encodeURIComponent(STXT + '\n\n' + PAGE);
-  ['btn-li-result','btn-li-finale'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.href = liURL;
-  });
-  ['btn-wa-result','btn-wa-finale'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.href = waURL;
-  });
+  // btn-li-result is now a button (onclick), not anchor — skip
+  const liFinale = document.getElementById('btn-li-finale');
+  if(liFinale) liFinale.href = liURL;
+  // WA result button — will be updated dynamically after quiz
+  const waResult = document.getElementById('btn-wa-result');
+  if(waResult) waResult.href = waURL;
+  const waFinale = document.getElementById('btn-wa-finale');
+  if(waFinale) waFinale.href = waURL;
+}
+
+function updateWAResult(){
+  // Called after result shown so WA carries actual score
+  const waResult = document.getElementById('btn-wa-result');
+  if(waResult){
+    const txt = generateShareText('wa');
+    waResult.href = 'https://wa.me/?text=' + encodeURIComponent(txt);
+  }
 }
 // Also keep function versions for any other callers
 function shareLI(){ window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(PAGE),'_blank'); }
