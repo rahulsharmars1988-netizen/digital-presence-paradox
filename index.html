@@ -553,8 +553,8 @@ footer{background:var(--ink);padding:38px 56px;display:flex;justify-content:spac
           <div class="res-presc" id="r-presc"></div>
           <div class="share-row">
             <div class="share-lbl">Share your result and help spread the framework</div>
-            <button class="sbtn sbtn-li" onclick="shareLI()">LinkedIn</button>
-            <button class="sbtn sbtn-wa" onclick="shareWA()">WhatsApp</button>
+            <a class="sbtn sbtn-li" id="btn-li-result" href="#" target="_blank" rel="noopener">Share on LinkedIn</a>
+            <a class="sbtn sbtn-wa" id="btn-wa-result" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
             <button class="sbtn sbtn-copy" onclick="copyURL()">Copy Link</button>
           </div>
           <button class="btn-retake" onclick="initQuiz()">↺ Retake Assessment</button>
@@ -629,7 +629,7 @@ footer{background:var(--ink);padding:38px 56px;display:flex;justify-content:spac
           <div class="auth-name">Rahul Sharma</div>
           <div class="auth-role" style="font-size:8.5px;line-height:1.7;letter-spacing:0.06em;">Higher Education Quality Architect&nbsp;|&nbsp;AI Institutional Intelligence Builder<br>NAAC&nbsp;·&nbsp;NBA&nbsp;·&nbsp;NIRF&nbsp;·&nbsp;UGC-DEB&nbsp;·&nbsp;AACSB&nbsp;·&nbsp;EQUIS&nbsp;·&nbsp;BGA<br>Online Education Governance&nbsp;|&nbsp;Oil &amp; Gas SME&nbsp;|&nbsp;Postgraduate Teaching</div>
           <ul class="contact-list">
-            <li><span class="c-ic">Email</span><a href="mailto:rahulsharma.rs1988@gmail.com">rahulsharma.rs1988@gmail.com</a></li>
+            <li><span class="c-ic">Email</span><a href="/cdn-cgi/l/email-protection#9deffcf5e8f1eef5fceff0fcb3efeeaca4a5a5ddfaf0fcf4f1b3fef2f0"><span class="__cf_email__" data-cfemail="9fedfef7eaf3ecf7feedf2feb1edecaea6a7a7dff8f2fef6f3b1fcf0f2">[email&#160;protected]</span></a></li>
             <li><span class="c-ic">Phone</span><a href="tel:+919997973350">+91 99979 73350</a></li>
             <li><span class="c-ic">LinkedIn</span><a href="https://www.linkedin.com/in/rahul-sharma-7b119a33/" target="_blank" rel="noopener">linkedin.com/in/rahul-sharma-7b119a33</a></li>
             <li><span class="c-ic">Year</span><span>2026 · All Rights Reserved</span></li>
@@ -649,8 +649,8 @@ footer{background:var(--ink);padding:38px 56px;display:flex;justify-content:spac
     <h2 class="sr">Know an educator who has seen this?</h2>
     <p class="sr d1">This concept spreads when the people who have lived it share it with the people who need to name it. If you have taught online and recognised something in this framework — send it forward.</p>
     <div class="finale-btns sr d2">
-      <button class="btn-fw" onclick="shareLI()">Share on LinkedIn</button>
-      <button class="btn-fg" onclick="shareWA()">Send on WhatsApp</button>
+      <a class="btn-fw" id="btn-li-finale" href="#" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a class="btn-fg" id="btn-wa-finale" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -658,7 +658,7 @@ footer{background:var(--ink);padding:38px 56px;display:flex;justify-content:spac
 <footer>
   <div class="ft-l">© 2026 Rahul Sharma. The Digital Presence Paradox & Digital Intellectual Presence (DIP).<br>All Rights Reserved. Original Framework · India.</div>
   <div class="ft-r">
-    <a href="mailto:rahulsharma.rs1988@gmail.com">Contact</a>
+    <a href="/cdn-cgi/l/email-protection#1e6c7f766b726d767f6c737f306c6d2f2726265e79737f7772307d7173">Contact</a>
     <a href="https://www.linkedin.com/in/rahul-sharma-7b119a33/" target="_blank">LinkedIn</a>
     <a href="#assessment">DIP Assessment</a>
   </div>
@@ -667,7 +667,7 @@ footer{background:var(--ink);padding:38px 56px;display:flex;justify-content:spac
 <div class="toast" id="toast">Link copied to clipboard</div>
 
 <!-- ═══════ SCRIPTS ═══════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* SCROLL REVEAL */
 const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}}),{threshold:0.08});
 document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
@@ -808,93 +808,169 @@ function showResult(){
   document.getElementById('r-presc').innerHTML=`<h4>What to do with this result</h4>`+px.map(p=>`<div class="presc-item"><span class="presc-arrow">→</span>${p}</div>`).join('');
 }
 
-/* ─── AI CHAT ─── */
-const SYS=`You are the research assistant for the Digital Presence Paradox — an original academic and pedagogical framework created by Rahul Sharma, a higher education quality assurance professional in India (2026).
+/* ─── INTELLIGENT FAQ ENGINE ─── */
+// Deep knowledge base — covers every real question about the DPP framework
+const KB = [
+  {
+    keys:['what is','digital presence paradox','dpp','paradox','define','definition','explain','overview','introduce','meaning'],
+    ans:`The Digital Presence Paradox (DPP) is an original framework by Rahul Sharma (2026) that names a structural condition in online education: learners can be fully visible to an institution — logged in, submitting, completing — while being entirely absent intellectually. They leave no trace in the shared learning environment. No question asked. No idea challenged. No peer influenced. The system was designed to produce this outcome through three mechanisms: the Anonymity Shield, the Consumption Architecture, and the Metrics Mismatch. The DPP is not a learner failure — it is a system failure. Read the full paper on SSRN.`
+  },
+  {
+    keys:['dip','digital intellectual presence','what is dip','define dip','dip mean'],
+    ans:`Digital Intellectual Presence (DIP) is defined as the degree to which a learner makes an active, traceable intellectual contribution to the shared knowledge environment of an online course. It is not the same as participation or activity. A learner can post frequently and still have zero DIP if those posts do not influence anyone else's thinking. DIP has three levels: Level 1 (You Exist — digitally visible, intellectually absent), Level 2 (You Engage — conditional intellectual presence), and Level 3 (You Contribute — full DIP, traceable intellectual fingerprint on the course).`
+  },
+  {
+    keys:['level 1','level one','exist','visible','invisible','absent'],
+    ans:`Level 1 DIP — "You Exist." The learner is digitally visible but intellectually absent. They log in, submit every assignment, complete the course, and leave zero intellectual trace in the shared learning space. Their LMS record is indistinguishable from a deeply engaged learner. This is the modal experience in online higher education — not an exception. The Anonymity Shield, Consumption Architecture, and Metrics Mismatch all converge to make Level 1 the default and rational choice for most learners in most online environments.`
+  },
+  {
+    keys:['level 2','level two','engage','engagement','conditional'],
+    ans:`Level 2 DIP — "You Engage." The learner makes traceable contributions — comments, questions, occasional pushback. Their intellectual presence is detectable but conditional: it depends on a psychologically safe environment, explicit course design that rewards intellectual risk, and sustained instructor facilitation. Most course design interventions (discussion rubrics, peer review) aim to move learners from Level 1 to Level 2. This is valuable, but Level 2 presence is environmentally contingent — it does not persist when scaffolding is removed.`
+  },
+  {
+    keys:['level 3','level three','contribute','contribution','fingerprint','highest','full dip','rarest'],
+    ans:`Level 3 DIP — "You Contribute." Full Digital Intellectual Presence. The learner generates original framings, challenges unexamined assumptions, introduces ideas that other learners build upon, and leaves a traceable intellectual fingerprint on the course. Other participants are intellectually different because this person was present. Level 3 DIP is rare in current online higher education — not because learners lack the capacity, but because the structural mechanisms of the DPP actively suppress it.`
+  },
+  {
+    keys:['anonymity shield','anonymity','social cost','invisible','cost'],
+    ans:`The Anonymity Shield is the first mechanism producing the Digital Presence Paradox. In a physical classroom, intellectual disengagement carries visible social cost — it is noticed by instructors and peers. Online, a learner can attend every session, submit every task, and contribute nothing intellectually — with zero social consequence. The cost of intellectual absence approaches zero, making passivity the rational default. This mechanism is amplified for learners from cultures where public intellectual challenge is socially discouraged.`
+  },
+  {
+    keys:['consumption architecture','lms','platform','moodle','canvas','blackboard','design','architecture'],
+    ans:`The Consumption Architecture is the second mechanism. Most Learning Management Systems (Canvas, Moodle, Blackboard) are built around content delivery: the instructor produces; the learner consumes. Intellectual co-construction — the actual mechanism by which knowledge becomes learning — is structurally marginal. Discussion forums are add-ons. Peer debate is optional. The path of least resistance runs through passive consumption, and most course design reinforces this. The platform was never designed to make intellectual contribution central.`
+  },
+  {
+    keys:['metrics mismatch','measure','completion','metric','measurement','data','analytics','track'],
+    ans:`The Metrics Mismatch is the third mechanism. Institutions measure what their infrastructure generates automatically: completion rates, login data, quiz scores, submission timestamps. Intellectual contribution — how often a learner's idea visibly alters another learner's thinking — is not measured because no instrument to do so has existed. When you measure completion, you optimise for completion. The result is a global quality assurance ecosystem that rewards intellectual absence as long as it is accompanied by compliant behaviour.`
+  },
+  {
+    keys:['ifi','intellectual fingerprint','fingerprint index','measure dip','how to measure','instrument','score','metric'],
+    ans:`The Intellectual Fingerprint Index (IFI) is the proposed operational instrument for measuring DIP at the individual learner level. It has six dimensions: Idea Origination (introducing new framings), Peer Influence Depth (visibly shifting others' thinking), Epistemic Risk-Taking (advancing challengeable positions), Co-Construction Frequency (building on peers' ideas), Intellectual Persistence (sustained engagement with a developing idea), and Transformative Contribution (ideas that appear in peers' summative work). The IFI can be piloted retrospectively on existing LMS discussion data — no new data collection required.`
+  },
+  {
+    keys:['naac','nirf','ugc','nba','accreditation','quality assurance','india','indian','nep','nep 2020'],
+    ans:`The DPP framework has direct implications for Indian higher education. NAAC criteria currently assess infrastructure, curriculum, and throughput — but no NAAC criterion asks whether learners in online courses are intellectually active. NEP 2020 mandates critical thinking as a learning outcome but has no measurement framework for intellectual presence in online contexts. The DIP Metrics Layer and IFI are proposed as instruments to fill this gap within the existing NAAC and NIRF quality architecture. This is a concrete policy application of the framework.`
+  },
+  {
+    keys:['community of inquiry','coi','garrison','cognitive presence','social presence','teaching presence','framework'],
+    ans:`The DPP framework extends the Community of Inquiry (CoI) model (Garrison, Anderson & Archer, 2000) rather than replacing it. The CoI describes the conditions for intellectual activity at the system level — cognitive, social, and teaching presence. DIP describes whether a specific learner is actually contributing intellectually within those conditions. A 2025 systematic review of 26 CoI studies (Chang et al., 2025) confirmed that existing CoI instruments inadequately capture individual-level intellectual contribution, co-regulation, and peer facilitation — the exact gap the IFI is designed to fill.`
+  },
+  {
+    keys:['ai','chatgpt','generative ai','genai','artificial intelligence','offloading','cognitive'],
+    ans:`Generative AI deepens the Digital Presence Paradox rather than resolving it. Research from 2024–2025 consistently documents that frequent AI tool reliance is associated with reduced critical thinking through cognitive offloading (Gerlich, 2025). The Bastani et al. (2025) PNAS study found that students using standard AI scored significantly worse when later tested without it. The Barcaui (2025) RCT found 11% lower retention at 45 days among AI-assisted learners. AI extends the Anonymity Shield (intellectual absence is now even more comfortable), deepens the Consumption Architecture (AI replaces even minimal engagement), and worsens the Metrics Mismatch (AI-generated work passes assessments without genuine intellectual work).`
+  },
+  {
+    keys:['solution','fix','solve','intervention','design','presence-first','asynchronous dialogue','ada'],
+    ans:`The DPP framework proposes four interventions. (1) Presence-First Course Design: every module contains at least one unavoidable moment of intellectual collision — the course cannot be completed without leaving a minimum intellectual trace. (2) DIP Metrics Layer: supplement completion data with intellectual engagement indicators derivable from existing LMS data. (3) Intellectual Fingerprint Score: make individual intellectual contribution visible and trackable. (4) Asynchronous Dialogue Architecture: replace performative discussion forums with position papers, structured rebuttals, peer teaching moments, and contested idea threads.`
+  },
+  {
+    keys:['vygotsky','dewey','bloom','theory','constructivist','constructivism','theoretical','anchor'],
+    ans:`The DPP framework is grounded in three educational theory traditions. Vygotsky's sociocultural theory holds that higher-order cognitive development occurs through collaborative dialogue — learning is co-constructed socially before it becomes individual. Online education has removed these dialogic conditions at scale. Dewey argued that genuine learning requires active inquiry, not passive reception. Bloom's Taxonomy distinguishes lower-order (remember, understand, apply) from higher-order (analyse, evaluate, create) cognitive operations. The Metrics Mismatch is, in Bloom's terms, an institutional failure to design for or assess higher-order cognitive activity.`
+  },
+  {
+    keys:['ssrn','paper','research','published','publication','cite','citation','doi','reference'],
+    ans:`The full academic paper — "The Digital Presence Paradox: Towards a Framework for Measuring Digital Intellectual Presence (DIP) in Online Higher Education" — has been submitted to SSRN (Social Science Research Network) for academic dissemination. It is an original conceptual framework paper with 26 verified references, published April 2026. Author: Rahul Sharma. Contact: rahulsharma.rs1988@gmail.com | +91 9997973350. Once the SSRN DOI is assigned, the paper will be permanently citable and freely accessible at ssrn.com.`
+  },
+  {
+    keys:['author','rahul','sharma','who','contact','email','phone','linkedin'],
+    ans:`Rahul Sharma is the originator of the Digital Presence Paradox framework and the Digital Intellectual Presence (DIP) construct. He is a Higher Education Quality Architect and AI Institutional Intelligence Builder with expertise across NAAC, NBA, NIRF, UGC-DEB, AACSB, EQUIS, and BGA accreditation frameworks. He works in Online Education Governance and Postgraduate Teaching, and has a background as an Oil & Gas SME. Contact: rahulsharma.rs1988@gmail.com | +91 9997973350 | linkedin.com/in/rahul-sharma-7b119a33`
+  },
+  {
+    keys:['different','engagement','difference','vs','versus','compared','distinguish'],
+    ans:`DIP is distinct from student engagement in three key ways. First, DIP is individual-level: it measures what a specific learner contributes, not the aggregate properties of a learning environment. Second, DIP is trace-based: it is assessed by what the learner leaves behind in the shared record, not by self-report or survey. Third, DIP is influence-oriented: it requires not just that a learner expresses ideas, but that those ideas are of sufficient quality to alter or advance another participant's thinking. High engagement scores can coexist with zero DIP — active compliance is not the same as intellectual presence.`
+  },
+  {
+    keys:['feedback','feedback void','real time','instructor','teacher','physical','classroom'],
+    ans:`The Feedback Void is the third layer of the paradox. A skilled physical classroom instructor maintains a continuous feedback loop — reading confusion through posture, expression, and peer interaction, adjusting pace in real time. Online education eliminated this loop without replacing it. Current LMS platforms track behaviour, not cognition. A platform can record that a learner paused a video at 4:32 — it cannot tell whether they paused because they were confused, disagreed, or simply received a phone call. No equivalent of the teacher's real-time cognitive awareness exists in online education. The DPP framework is the first to name this absence as a core structural failure.`
+  },
+  {
+    keys:['global','worldwide','international','scale','billion','countries'],
+    ans:`The Digital Presence Paradox operates at global scale. Over 1.3 billion learners engaged with online or hybrid platforms by 2024. The EdTech market is valued at USD 277 billion in 2025, projected to exceed USD 900 billion by 2034. Yet the UNESCO Global Education Monitoring Report (2024/5) documents that near-universal enrolment coexists with deep learning outcome deficits — only 43% of students in developing nations achieve basic reading proficiency. The DPP framework applies equally to NAAC-accredited institutions in India, AACSB-accredited business schools globally, distance universities in Southeast Asia, and online programmes at UK and US institutions.`
+  }
+];
 
-THE DIGITAL PRESENCE PARADOX is the condition where online education simultaneously maximises learner visibility (logins, submissions, completions) while minimising learner intellectual presence (active knowledge co-construction, peer intellectual influence, traceable intellectual contribution to shared understanding).
+function getAnswer(q) {
+  const ql = q.toLowerCase();
+  // Score each KB entry by keyword matches
+  let best = null, bestScore = 0;
+  KB.forEach(entry => {
+    let score = 0;
+    entry.keys.forEach(k => {
+      if (ql.includes(k)) score += k.split(' ').length; // longer matches score higher
+    });
+    if (score > bestScore) { bestScore = score; best = entry; }
+  });
+  if (best && bestScore > 0) return best.ans;
+  // Fallback
+  return `This is a knowledge assistant for the Digital Presence Paradox framework by Rahul Sharma. You can ask about: the DPP definition, the three mechanisms (Anonymity Shield, Consumption Architecture, Metrics Mismatch), DIP levels (1, 2, 3), the Intellectual Fingerprint Index (IFI), NAAC/NIRF implications, how DIP differs from engagement, the role of AI, solution architecture, or the published SSRN paper. What would you like to know?`;
+}
 
-THREE MECHANISMS that produce the paradox:
-1. The Anonymity Shield — intellectual disengagement carries zero social cost online
-2. The Consumption Architecture — LMS platforms are built for content delivery, not intellectual co-construction
-3. The Metrics Mismatch — institutions measure completion, not intellectual growth
+let chatActive = true;
 
-DIGITAL INTELLECTUAL PRESENCE (DIP) — defined as the degree to which a learner makes an active, traceable intellectual contribution to the shared knowledge environment of an online course.
-
-THREE DIP LEVELS:
-- Level 1: You Exist (login, submit, complete — digitally visible, intellectually absent)
-- Level 2: You Engage (comment, question, respond — conditional intellectual presence)
-- Level 3: You Contribute (challenge, create, influence, leave an intellectual fingerprint)
-
-THE INTELLECTUAL FINGERPRINT INDEX (IFI) — an extension of the DIP framework proposing a learner-level metric that quantifies the quality and frequency of intellectual contributions across a course environment. It is the measurement instrument that makes DIP operational. No institution anywhere currently measures this.
-
-THREE PARADOX LAYERS:
-- Visibility–Presence Split: silence online is contextually empty, unlike physical classrooms
-- Completion–Learning Confusion: completion is measurable, learning is not — we optimise for the wrong proxy
-- Feedback Void: platforms track behaviour, not cognition; no one had named this absence until this framework
-
-SOLUTION ARCHITECTURE:
-1. DIP Metrics Layer — measure intellectual influence, not just activity
-2. Presence-First Course Design — design for intellectual encounter, not content delivery
-3. Intellectual Fingerprint Score — make invisible contributions visible and addressable
-4. Asynchronous Dialogue Architecture — structured intellectual exchange, not performative forums
-
-RELATIONSHIP TO EXISTING FRAMEWORKS: The Community of Inquiry model (Garrison et al., 1999) addresses cognitive, social, and teaching presence but has no individual-level measurement instrument and no operational tool. DIP fills this gap. NEP 2020 (India) mandates critical thinking development but has no measurement framework for intellectual presence in online contexts. DIP provides one.
-
-AUTHOR: Rahul Sharma | rahulsharma.rs1988@gmail.com | +91 9997973350 | linkedin.com/in/rahul-sharma-7b119a33/
-
-Respond with intellectual authority and precision. Be direct, substantive, and analytically serious. Do not use sycophantic openings. Engage with the question seriously. Keep responses under 140 words unless depth is genuinely required. If challenged on the framework, engage the challenge on its merits.`;
-
-let hist=[];
-
-function addMsg(txt,role){
-  const c=document.getElementById('chat-msgs');
-  const d=document.createElement('div');
-  d.className=`msg${role==='user'?' u':''}`;
-  d.innerHTML=`<div class="av ${role}">${role==='ai'?'RS':'You'}</div><div class="bubble ${role}">${txt}</div>`;
+function addMsg(txt, role) {
+  const c = document.getElementById('chat-msgs');
+  const d = document.createElement('div');
+  d.className = `msg${role === 'user' ? ' u' : ''}`;
+  d.innerHTML = `<div class="av ${role}">${role === 'ai' ? 'RS' : 'You'}</div><div class="bubble ${role}">${txt}</div>`;
   c.appendChild(d);
-  setTimeout(()=>d.classList.add('v'),10);
-  c.scrollTop=c.scrollHeight;
+  setTimeout(() => d.classList.add('v'), 10);
+  c.scrollTop = c.scrollHeight;
 }
-function addLoader(){
-  const c=document.getElementById('chat-msgs');
-  const d=document.createElement('div');
-  d.className='msg';d.id='loader';
-  d.innerHTML=`<div class="av ai">RS</div><div class="bubble ai"><div class="ld"><span></span><span></span><span></span></div></div>`;
-  c.appendChild(d);setTimeout(()=>d.classList.add('v'),10);c.scrollTop=c.scrollHeight;
+
+function addTyping() {
+  const c = document.getElementById('chat-msgs');
+  const d = document.createElement('div');
+  d.className = 'msg'; d.id = 'loader';
+  d.innerHTML = `<div class="av ai">RS</div><div class="bubble ai"><div class="ld"><span></span><span></span><span></span></div></div>`;
+  c.appendChild(d);
+  setTimeout(() => d.classList.add('v'), 10);
+  c.scrollTop = c.scrollHeight;
 }
-async function sendChat(){
-  const inp=document.getElementById('chat-inp');
-  const msg=inp.value.trim();if(!msg)return;
-  inp.value='';
-  document.getElementById('chat-send').disabled=true;
-  document.getElementById('chips').style.display='none';
-  addMsg(msg,'user');addLoader();
-  try{
-    const msgs=hist.concat([{role:'user',content:msg}]);
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS,messages:msgs})});
-    const data=await res.json();
-    const reply=data.content?.[0]?.text||'I encountered an error. Please try again.';
+
+function sendChat() {
+  const inp = document.getElementById('chat-inp');
+  const msg = inp.value.trim();
+  if (!msg || !chatActive) return;
+  inp.value = '';
+  document.getElementById('chat-send').disabled = true;
+  document.getElementById('chips').style.display = 'none';
+  chatActive = false;
+  addMsg(msg, 'user');
+  addTyping();
+  // Simulate thinking delay for natural feel
+  setTimeout(() => {
     document.getElementById('loader')?.remove();
-    addMsg(reply,'ai');
-    hist.push({role:'user',content:msg});
-    hist.push({role:'assistant',content:reply});
-  }catch(e){document.getElementById('loader')?.remove();addMsg('A network error occurred. Please try again.','ai');}
-  document.getElementById('chat-send').disabled=false;
+    const reply = getAnswer(msg);
+    addMsg(reply, 'ai');
+    document.getElementById('chat-send').disabled = false;
+    chatActive = true;
+  }, 900 + Math.random() * 600);
 }
-function sendChip(btn){
-  document.getElementById('chat-inp').value=btn.textContent.trim();
-  document.getElementById('chips').style.display='none';
+
+function sendChip(btn) {
+  document.getElementById('chat-inp').value = btn.textContent.trim();
+  document.getElementById('chips').style.display = 'none';
   sendChat();
 }
 
 /* ─── SHARE ─── */
 const PAGE=window.location.href;
 const STXT='I just took the Digital Intellectual Presence (DIP) assessment — a framework by Rahul Sharma on the Digital Presence Paradox in online education. Are you digitally present but intellectually invisible?';
-function shareLI(){window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(PAGE),'_blank');}
-function shareWA(){
-  const txt=encodeURIComponent(STXT+'\n\n'+PAGE);
-  window.open('https://wa.me/?text='+txt,'_blank');
+function buildShareURLs(){
+  const liURL = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(PAGE);
+  const waURL = 'https://wa.me/?text=' + encodeURIComponent(STXT + '\n\n' + PAGE);
+  ['btn-li-result','btn-li-finale'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = liURL;
+  });
+  ['btn-wa-result','btn-wa-finale'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = waURL;
+  });
 }
+// Also keep function versions for any other callers
+function shareLI(){ window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(PAGE),'_blank'); }
+function shareWA(){ window.open('https://wa.me/?text='+encodeURIComponent(STXT+'\n\n'+PAGE),'_blank'); }
 function copyURL(){
   navigator.clipboard.writeText(PAGE).then(()=>{
     const t=document.getElementById('toast');
@@ -912,6 +988,7 @@ function copyURL(){
 
 /* INIT */
 initQuiz();
+buildShareURLs();
 </script>
 </body>
 </html>
